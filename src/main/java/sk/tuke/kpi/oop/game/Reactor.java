@@ -29,8 +29,8 @@ public class Reactor extends AbstractActor {
         return this.damage;
     }
 
-    private void updateAnimation(Animation setAnimation){
-        this.AnimationState = setAnimation;
+    private void updateAnimation(Animation changeAnimation){
+        this.AnimationState = changeAnimation;
         setAnimation(this.AnimationState);
     }
 
