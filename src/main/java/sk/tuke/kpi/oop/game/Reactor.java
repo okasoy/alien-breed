@@ -29,12 +29,13 @@ public class Reactor extends AbstractActor {
         return this.damage;
     }
 
-    private void updateAnimation(Animation setAnimation){
-        this.AnimationState = setAnimation;
+    private void updateAnimation(Animation changeAnimation){
+        this.AnimationState = changeAnimation;
         setAnimation(this.AnimationState);
     }
 
     public void increaseTemperature(int increment){
+        if(increment < 0) return;
         if(this.damage >= 33 && this.damage <= 66){
             double newIncrement = increment * 1.5;
             increment = (int) Math.round(newIncrement);
@@ -55,6 +56,7 @@ public class Reactor extends AbstractActor {
     }
 
     public void decreaseTemperature(int decrement){
+        if(decrement < 0) return;
         if(this.damage >= 50){
             double newDecrement = decrement / 2;
             decrement = (int) Math.round(newDecrement);
