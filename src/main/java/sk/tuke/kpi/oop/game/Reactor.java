@@ -13,12 +13,9 @@ public class Reactor extends AbstractActor {
 
     public Reactor(){
         this.normalAnimation = new Animation("sprites/reactor_on.png", 80, 80, 0.1f, Animation.PlayMode.LOOP_PINGPONG);
-        //setAnimation(normalAnimation);
         this.AnimationState = this.normalAnimation;
         this.hotAnimation = new Animation("sprites/reactor_hot.png", 80, 80, 0.05f, Animation.PlayMode.LOOP_PINGPONG);
-        //setAnimation(hotAnimation);
         this.brokenAnimation = new Animation("sprites/reactor_broken.png", 80, 80, 0.1f, Animation.PlayMode.LOOP_PINGPONG);
-        //setAnimation(brokenAnimation);
         setAnimation(this.AnimationState);
         this.temperature = 0;
         this.damage = 0;
@@ -28,8 +25,13 @@ public class Reactor extends AbstractActor {
         return this.temperature;
     }
 
-    public int getDamage(){
+    public int getDamage() {
         return this.damage;
+    }
+
+    private void updateAnimation(Animation setAnimation){
+        this.AnimationState = setAnimation;
+        setAnimation(this.AnimationState);
     }
 
     public void increaseTemperature(int increment){
@@ -44,13 +46,22 @@ public class Reactor extends AbstractActor {
         if(this.temperature > 2000 && this.damage < 100){
             this.damage = (this.temperature - 2000) * 100 / 4000;
             if(this.temperature > 4000 && this.temperature < 6000){
-                this.AnimationState = this.hotAnimation;
-                setAnimation(this.AnimationState);
+                updateAnimation(this.hotAnimation);
             }
             if(this.temperature >= 6000){
-                this.AnimationState = this.brokenAnimation;
-                setAnimation(this.AnimationState);
+                updateAnimation(this.brokenAnimation);
             }
+        }
+    }
+
+    public void decreaseTemperature(int decrement){
+        if(this.damage >= 50){
+            double newDecrement = decrement / 2;
+            decrement = (int) Math.round(newDecrement);
+        }
+        this.temperature -= decrement;
+        if(this.damage < 100 && this.temperature <= 4000){
+            updateAnimation(this.normalAnimation);
         }
     }
 }
