@@ -107,8 +107,8 @@ public class Reactor extends AbstractActor {
     }
 
     public void addLight(Light light){
-        if(this.lightCounter > 1) return;
-        this.lightCounter = 1;
+        if(this.lightCounter > 0) return;
+        this.lightCounter++;
         this.itsLight = light;
         this.itsLight.setElectricityFlow(this.isRunning());
         this.itsLight.toggle();
