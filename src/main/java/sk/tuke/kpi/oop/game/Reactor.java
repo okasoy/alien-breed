@@ -1,8 +1,11 @@
 package sk.tuke.kpi.oop.game;
 
-import org.jetbrains.annotations.NotNull;
+import sk.tuke.kpi.gamelib.Scene;
 import sk.tuke.kpi.gamelib.framework.AbstractActor;
 import sk.tuke.kpi.gamelib.graphics.Animation;
+import sk.tuke.kpi.oop.game.actions.PerpetualReactorHeating;
+import sk.tuke.kpi.oop.game.tools.FireExtinguisher;
+import sk.tuke.kpi.oop.game.tools.Hammer;
 
 public class Reactor extends AbstractActor {
     private int temperature;
@@ -80,7 +83,8 @@ public class Reactor extends AbstractActor {
         updateAnimation();
     }
 
-    public void repairWith(@NotNull Hammer hammer){
+    public void repairWith(Hammer hammer){
+        if(hammer == null) return;
         if(this.damage == 0 || this.damage == 100) return;
         if(hammer.getUsage() == 0) return;
         hammer.use();
@@ -127,4 +131,12 @@ public class Reactor extends AbstractActor {
         setAnimation(this.AnimationState);
         extinguisher.use();
     }
+
+    @Override
+    public void addedToScene(Scene scene){
+        super.addedToScene(scene);
+        scene.scheduleAction(new PerpetualReactorHeating(1), this);
+        new PerpetualReactorHeating(1).scheduleFor(this);
+    }
+
 }
