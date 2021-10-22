@@ -1,5 +1,7 @@
 package sk.tuke.kpi.oop.game;
 
+import sk.tuke.kpi.gamelib.Scene;
+import sk.tuke.kpi.gamelib.actions.Action;
 import sk.tuke.kpi.gamelib.actions.Invoke;
 import sk.tuke.kpi.gamelib.framework.AbstractActor;
 import sk.tuke.kpi.gamelib.framework.Player;
@@ -12,6 +14,7 @@ public class Helicopter extends AbstractActor {
     public Helicopter(){
         this.heliAnimation = new Animation("sprites/heli.png",64,64,0.1f, Animation.PlayMode.LOOP_PINGPONG);
         setAnimation(this.heliAnimation);
+        super.addedToScene(this.getScene());
     }
 
     public void searchAndDestroy(){

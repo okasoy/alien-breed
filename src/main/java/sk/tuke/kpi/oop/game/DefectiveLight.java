@@ -1,10 +1,18 @@
 package sk.tuke.kpi.oop.game;
 
+import sk.tuke.kpi.gamelib.Disposable;
 import sk.tuke.kpi.gamelib.Scene;
+import sk.tuke.kpi.gamelib.actions.ActionSequence;
 import sk.tuke.kpi.gamelib.actions.Invoke;
+import sk.tuke.kpi.gamelib.actions.Wait;
 import sk.tuke.kpi.gamelib.framework.actions.Loop;
 
-public class DefectiveLight extends Light{
+public class DefectiveLight extends Light implements Repairable{
+    private Disposable disposedLight;
+
+    public DefectiveLight(){
+        super();
+    }
 
     public void lightsBehavior(){
         int max = 20;
@@ -17,10 +25,20 @@ public class DefectiveLight extends Light{
     }
 
     @Override
+    public boolean repair(){
+        this.disposedLight.dispose();
+        super.turnOn();
+        this.disposedLight = new ActionSequence<>(
+            new Wait<>(10),
+            new Loop<>(new Invoke<>(this::lightsBehavior))
+        ).scheduleFor(this);
+        return true;
+    }
+
+    @Override
     public void addedToScene(Scene scene){
         super.addedToScene(scene);
-        new Invoke<>(this::lightsBehavior).scheduleFor(this);
-        new Loop<>(new Invoke<>(this::lightsBehavior)).scheduleFor(this);
+        this.disposedLight = new Loop<>(new Invoke<>(this::lightsBehavior)).scheduleFor(this);
     }
 
 }
