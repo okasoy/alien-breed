@@ -79,7 +79,7 @@ public class Gameplay extends Scenario {
         turnOnCooler(cooler);
         turnOnCooler(cooler2);
         turnOnCooler(cooler3);
-        Hammer hammer = new Hammer();
+        Hammer hammer = new Hammer(1);
         scene.addActor(hammer, 152, 132);
         useHammer(reactor, hammer);
         FireExtinguisher extinguisher = new FireExtinguisher();
