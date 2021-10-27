@@ -14,7 +14,6 @@ public class Wrench extends BreakableTool<DefectiveLight> {
     @Override
     public void useWith(DefectiveLight defectiveLight){
         if(defectiveLight == null) return;
-        defectiveLight.repair();
-        super.useWith(defectiveLight);
+        if(defectiveLight.repair()) super.useWith(defectiveLight);
     }
 }

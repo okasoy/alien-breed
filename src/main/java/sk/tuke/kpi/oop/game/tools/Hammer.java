@@ -16,10 +16,8 @@ public class Hammer extends BreakableTool<Repairable> {
         setAnimation(hammerAnimation);
     }
 
-    @Override
-    public void useWith(Repairable repairable){
-        if(repairable == null) return;
-        repairable.repair();
-        super.useWith(repairable);
+    public void useWith(Reactor reactor){
+        if(reactor == null) return;
+        if(reactor.repair() == true) super.useWith(reactor);
     }
 }
