@@ -9,12 +9,15 @@ import sk.tuke.kpi.gamelib.framework.actions.Loop;
 
 public class DefectiveLight extends Light implements Repairable{
     private Disposable disposedLight;
+    private boolean isRepaired;
 
     public DefectiveLight(){
         super();
+        this.isRepaired = false;
     }
 
     public void lightsBehavior(){
+        this.isRepaired = false;
         int max = 20;
         int min = 0;
         int range = max - min;
@@ -26,6 +29,8 @@ public class DefectiveLight extends Light implements Repairable{
 
     @Override
     public boolean repair(){
+        if(this.isRepaired == true) return false;
+        this.isRepaired = true;
         this.disposedLight.dispose();
         super.turnOn();
         this.disposedLight = new ActionSequence<>(

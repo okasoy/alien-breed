@@ -63,27 +63,22 @@ public class Reactor extends AbstractActor implements Switchable, Repairable{
 
     public void increaseTemperature(int increment){
         if(increment < 0 || this.isOn == false) return;
-        if(this.damage >= 33 && this.damage <= 66){
-            double newIncrement = increment * 1.5;
-            increment = (int) Math.round(newIncrement);
-        }
-        else if(this.damage > 66){
-            increment = increment * 2;
-        }
-        this.temperature += increment;
+        int newIncrement = increment;
+        if(this.damage >= 33 && this.damage <= 66) newIncrement = (int) Math.round(newIncrement * 1.5);
+        else if(this.damage > 66) newIncrement = newIncrement * 2;
+        this.temperature += newIncrement;
         if(this.temperature > 2000 && this.damage < 100){
             this.damage = (this.temperature - 2000) * 100 / 4000;
+            if(this.damage > 100) this.damage = 100;
             updateAnimation();
         }
     }
 
     public void decreaseTemperature(int decrement){
         if(decrement < 0 || this.isOn == false) return;
-        if(this.damage >= 50){
-            double newDecrement = decrement / 2;
-            decrement = (int) Math.round(newDecrement);
-        }
-        this.temperature -= decrement;
+        int newDecrement = decrement;
+        if(this.damage >= 50) newDecrement = Math.round(newDecrement / 2);
+        this.temperature -= newDecrement;
         updateAnimation();
     }
 
@@ -120,6 +115,7 @@ public class Reactor extends AbstractActor implements Switchable, Repairable{
 
     public void addDevice(EnergyConsumer device){
         this.devices.add(device);
+        if(this.isOn == false) return;
         device.setPowered(true);
     }
 

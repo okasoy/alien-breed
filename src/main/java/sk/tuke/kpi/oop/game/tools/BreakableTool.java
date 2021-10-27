@@ -10,7 +10,7 @@ public abstract class BreakableTool<A extends Actor> extends AbstractActor imple
         this.remainingUses = remainingUses;
     }
 
-    public int getUsage() {
+    public int getRemainingUses() {
         return this.remainingUses;
     }
 

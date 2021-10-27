@@ -1,6 +1,5 @@
 package sk.tuke.kpi.oop.game;
 
-import sk.tuke.kpi.gamelib.Actor;
 import sk.tuke.kpi.gamelib.Scene;
 import sk.tuke.kpi.gamelib.actions.Invoke;
 import sk.tuke.kpi.gamelib.framework.AbstractActor;
@@ -9,13 +8,12 @@ import sk.tuke.kpi.gamelib.framework.actions.Loop;
 import sk.tuke.kpi.gamelib.graphics.Animation;
 
 public class Teleport extends AbstractActor {
-    private Animation teleportAnimation;
     private Teleport itsTarget;
     private boolean isTeleported;
 
     public Teleport(Teleport target){
-        this.teleportAnimation = new Animation("sprites/lift.png");
-        setAnimation(this.teleportAnimation);
+        Animation teleportAnimation = new Animation("sprites/lift.png");
+        setAnimation(teleportAnimation);
         this.itsTarget = target;
         this.isTeleported = false;
     }
@@ -25,6 +23,7 @@ public class Teleport extends AbstractActor {
     }
 
     public void setDestination(Teleport destinationTeleport){
+        if(destinationTeleport == this) return;
         this.itsTarget = destinationTeleport;
     }
 
@@ -42,14 +41,14 @@ public class Teleport extends AbstractActor {
         y2 = this.itsTarget.getPosY() + this.itsTarget.getHeight() / 4;
         x3 = player.getPosX() + player.getWidth() / 2;
         y3 = player.getPosY() + player.getHeight() / 2;
-        if((x3 > x1 - 2) && (y3 < y1 + 2) && (x3 < x1 + 2) && (y3 > y1 - 2) ) {
-            player.setPosition(x2, y2);
-            this.itsTarget.isTeleported = true;
-        }
-        /*if(x3 == x1 && y3 == y1) {
+        /*if((x3 > x1 - 2) && (y3 < y1 + 2) && (x3 < x1 + 2) && (y3 > y1 - 2) ) {
             player.setPosition(x2, y2);
             this.itsTarget.isTeleported = true;
         }*/
+        if(x3 == x1 && y3 == y1) {
+            player.setPosition(x2, y2);
+            this.itsTarget.isTeleported = true;
+        }
     }
 
     @Override
