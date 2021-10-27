@@ -27,9 +27,8 @@ public class Teleport extends AbstractActor {
         this.itsTarget = destinationTeleport;
     }
 
-    public void teleportPlayer() {
+    public void teleportPlayer(Player player) {
         if(this.itsTarget == null) return;
-        Player player = (Player) getScene().getFirstActorByName("Player");
         if(this.isTeleported == true){
             if(this.intersects(player)) return;
             else this.isTeleported = false;
@@ -54,8 +53,7 @@ public class Teleport extends AbstractActor {
     @Override
     public void addedToScene(Scene scene){
         super.addedToScene(scene);
-        new Loop<>(
-            new Invoke<>(this::teleportPlayer)
-        ).scheduleFor(this);
+        Player player = (Player) getScene().getFirstActorByName("Player");
+        new Loop<>(new Invoke<>(this::teleportPlayer)).scheduleFor(player);
     }
 }

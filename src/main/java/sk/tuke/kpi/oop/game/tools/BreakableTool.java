@@ -15,7 +15,7 @@ public abstract class BreakableTool<A extends Actor> extends AbstractActor imple
     }
 
     @Override
-    public void useWith(Actor actor) {
+    public void useWith(A actor) {
         if(this.remainingUses == 0) return;
         this.remainingUses -= 1;
         if(this.remainingUses == 0){

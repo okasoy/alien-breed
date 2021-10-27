@@ -53,7 +53,7 @@ public class Gameplay extends Scenario {
         new ActionSequence<>(
             new Wait<>(5),
             new Invoke<>(wrench::useWith)
-        ).scheduleFor(wrench);
+        ).scheduleFor(defectiveLight);
     }
 
     @Override

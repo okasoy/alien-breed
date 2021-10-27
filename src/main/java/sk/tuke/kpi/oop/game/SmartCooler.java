@@ -13,6 +13,7 @@ public class SmartCooler extends Cooler{
     }
 
     private void coolReactor(){
+        if(this.reactor == null) return;
         if(this.reactor.getTemperature() > 2500) {
             this.turnOn();
         }
@@ -24,7 +25,6 @@ public class SmartCooler extends Cooler{
     @Override
     public void addedToScene(Scene scene){
         super.addedToScene(scene);
-        new Invoke<>(this::coolReactor).scheduleFor(this);
         new Loop<>(new Invoke<>(this::coolReactor)).scheduleFor(this);
     }
 
