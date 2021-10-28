@@ -15,7 +15,7 @@ public class ChainBomb extends TimeBomb {
     @Override
     public void explode(){
         super.explode();
-        Ellipse2D.Float ellipse = new Ellipse2D.Float(this.getPosX() - 42, this.getPosY() - 58, 100, 100);
+        Ellipse2D.Float ellipse = new Ellipse2D.Float(this.getPosX() - 42, this.getPosY() - 58, 102, 102);
         List<Actor> bombs = getScene().getActors();
         for(Actor actor: bombs){
             if(actor instanceof ChainBomb && !((ChainBomb) actor).isActivated()){

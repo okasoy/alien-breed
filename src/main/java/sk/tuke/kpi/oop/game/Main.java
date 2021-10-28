@@ -2,7 +2,10 @@ package sk.tuke.kpi.oop.game;
 
 import sk.tuke.kpi.gamelib.*;
 import sk.tuke.kpi.gamelib.backends.lwjgl.LwjglBackend;
+import sk.tuke.kpi.gamelib.inspector.InspectableScene;
 import sk.tuke.kpi.oop.game.scenarios.FirstSteps;
+
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
@@ -10,8 +13,11 @@ public class Main {
 
         Game game = new GameApplication(windowSetup, new LwjglBackend());
 
-        Scene scene = new World("world");
+        //Scene scene = new World("world");
 
+        //game.addScene(scene);
+
+        Scene scene = new InspectableScene(new World("world"), List.of("sk.tuke.kpi"));
         game.addScene(scene);
 
         FirstSteps beginning = new FirstSteps();

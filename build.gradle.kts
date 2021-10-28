@@ -26,6 +26,7 @@ application {
 dependencies {
     implementation("sk.tuke.kpi.gamelib:gamelib-framework:$gamelibVersion")
     implementation("sk.tuke.kpi.gamelib:gamelib-backend-$backend:$gamelibVersion")
+    implementation("sk.tuke.kpi.gamelib:gamelib-inspector:$gamelibVersion")
 }
 
 tasks {
@@ -33,3 +34,4 @@ tasks {
         options.compilerArgs.addAll(listOf("-parameters", "-Xlint:unchecked,rawtypes", "-Werror"))
     }
 }
+

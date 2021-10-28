@@ -31,7 +31,8 @@ public class Light extends AbstractActor implements Switchable, EnergyConsumer{
     @Override
     public void turnOff() {
         this.isOn = false;
-        setAnimation(this.LightIsOff);
+        if(this.isElectricity == false)setAnimation(this.LightIsOff);
+        else setAnimation(this.LightIsOn);
     }
 
     public void toggle(){
