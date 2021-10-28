@@ -23,7 +23,7 @@ public class DefectiveLight extends Light implements Repairable{
         int range = max - min;
         int rand = (int)(Math.random()*range) + min;
         if(rand == 1){
-            super.toggle();
+            this.toggle();
         }
     }
 
