@@ -1,4 +1,4 @@
-package sk.tuke.kpi.oop.game;
+package sk.tuke.kpi.oop.game.scenarios;
 
 import org.jetbrains.annotations.NotNull;
 import sk.tuke.kpi.gamelib.Scene;
@@ -8,13 +8,17 @@ import sk.tuke.kpi.gamelib.actions.Wait;
 import sk.tuke.kpi.gamelib.actions.When;
 import sk.tuke.kpi.gamelib.framework.Scenario;
 import sk.tuke.kpi.gamelib.map.MapMarker;
+import sk.tuke.kpi.oop.game.Computer;
+import sk.tuke.kpi.oop.game.Cooler;
+import sk.tuke.kpi.oop.game.DefectiveLight;
+import sk.tuke.kpi.oop.game.Reactor;
 import sk.tuke.kpi.oop.game.tools.FireExtinguisher;
 import sk.tuke.kpi.oop.game.tools.Hammer;
 import sk.tuke.kpi.oop.game.tools.Wrench;
 
 import java.util.Map;
 
-public class Gameplay extends Scenario {
+public class TrainingGameplay extends Scenario {
 
     private void turnOnCooler(Cooler cooler){
         new ActionSequence<>(
