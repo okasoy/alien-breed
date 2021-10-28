@@ -40,14 +40,14 @@ public class Teleport extends AbstractActor {
         y2 = this.itsTarget.getPosY() + this.itsTarget.getHeight() / 4;
         x3 = player.getPosX() + player.getWidth() / 2;
         y3 = player.getPosY() + player.getHeight() / 2;
-        /*if((x3 > x1 - 3) && (y3 < y1 + 3) && (x3 < x1 + 3) && (y3 > y1 - 3) ) {
-            player.setPosition(x2, y2);
-            this.itsTarget.isTeleported = true;
-        }*/
-        if(x3 == x1 && y3 == y1) {
+        if((x3 > x1 - 2) && (y3 < y1 + 2) && (x3 < x1 + 2) && (y3 > y1 - 2) ) {
             player.setPosition(x2, y2);
             this.itsTarget.isTeleported = true;
         }
+        /*if(x3 == x1 && y3 == y1) {
+            player.setPosition(x2, y2);
+            this.itsTarget.isTeleported = true;
+        }*/
     }
 
     @Override
