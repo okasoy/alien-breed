@@ -54,7 +54,7 @@ public class Light extends AbstractActor implements Switchable, EnergyConsumer{
     @Override
     public void setPowered(boolean isPowered) {
         this.setElectricityFlow(isPowered);
-        this.toggle();
+        this.updateAnimation();
     }
 
 }
