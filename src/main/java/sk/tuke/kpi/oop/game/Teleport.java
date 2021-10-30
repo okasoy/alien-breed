@@ -1,9 +1,7 @@
 package sk.tuke.kpi.oop.game;
 
-import sk.tuke.kpi.gamelib.Disposable;
 import sk.tuke.kpi.gamelib.Scene;
 import sk.tuke.kpi.gamelib.actions.Invoke;
-import sk.tuke.kpi.gamelib.actions.When;
 import sk.tuke.kpi.gamelib.framework.AbstractActor;
 import sk.tuke.kpi.gamelib.framework.Player;
 import sk.tuke.kpi.gamelib.framework.actions.Loop;
@@ -11,7 +9,6 @@ import sk.tuke.kpi.gamelib.graphics.Animation;
 
 public class Teleport extends AbstractActor {
     private Teleport itsTarget;
-    private Disposable disposeTeleport;
     private boolean isTeleported;
 
     public Teleport(Teleport target){
@@ -39,16 +36,9 @@ public class Teleport extends AbstractActor {
         y2 = this.itsTarget.getPosY() + this.itsTarget.getHeight() / 6;
         x3 = player.getPosX() + player.getWidth() / 2;
         y3 = player.getPosY() + player.getHeight() / 2;
-        if((x3 > x1 - this.getWidth()/2) && (y3 < y1 + this.getHeight()/2) && (x3 < x1 + this.getWidth()/2) && (y3 > y1 - this.getHeight()/2) ) {
+        if(this.wasTeleported(player) == true && (x3 > x1 - this.getWidth()/2) && (y3 < y1 + this.getHeight()/2) && (x3 < x1 + this.getWidth()/2) && (y3 > y1 - this.getHeight()/2) ) {
             player.setPosition(x2, y2);
             this.itsTarget.isTeleported = true;
-            this.itsTarget.disposeTeleport.dispose();
-            this.itsTarget.disposeTeleport = new Loop<>(
-                new When<>(
-                    () -> this.itsTarget.wasTeleported(player) == true,
-                    new Invoke<>(this.itsTarget::teleportPlayer)
-                )
-            ).scheduleFor(player);
         }
     }
 
@@ -60,10 +50,15 @@ public class Teleport extends AbstractActor {
         return true;
     }
 
+    public void canTeleport(Player player){
+        if(this.wasTeleported(player) == true) this.teleportPlayer(player);
+    }
+
     @Override
     public void addedToScene(Scene scene){
         super.addedToScene(scene);
         Player player = (Player) getScene().getFirstActorByName("Player");
-        this.disposeTeleport = new Loop<>(new Invoke<>(this::teleportPlayer)).scheduleFor(player);
+        new Loop<>(new Invoke<>(this::teleportPlayer)).scheduleFor(player);
     }
+
 }
