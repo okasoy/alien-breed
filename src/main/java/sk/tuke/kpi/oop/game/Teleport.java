@@ -58,7 +58,7 @@ public class Teleport extends AbstractActor {
     public void addedToScene(Scene scene){
         super.addedToScene(scene);
         Player player = (Player) getScene().getFirstActorByName("Player");
-        new Loop<>(new Invoke<>(this::teleportPlayer)).scheduleFor(player);
+        new Loop<>(new Invoke<>(this::canTeleport)).scheduleFor(player);
     }
 
 }
