@@ -4,7 +4,12 @@ public enum Direction {
     NORTH(0, 1),
     EAST(1, 0),
     SOUTH(0, -1),
-    WEST(-1, 0);
+    WEST(-1, 0),
+    NORTHEAST(1,1),
+    SOUTHEAST(1, -1),
+    NORTHWEST(-1, 1),
+    SOUTHWEST(-1, -1),
+    NONE(0, 0);
     private final int dx;
     private final int dy;
 
@@ -38,4 +43,8 @@ public enum Direction {
         }
         return 0;
     }
+
+    /*public Direction combine(Direction other){
+        Direction.values();
+    }*/
 }
