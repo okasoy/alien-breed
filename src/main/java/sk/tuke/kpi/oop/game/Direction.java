@@ -44,7 +44,18 @@ public enum Direction {
         return 0;
     }
 
-    /*public Direction combine(Direction other){
-        Direction.values();
-    }*/
+    public Direction combine(Direction other){
+        if(other == this) return this;
+        int x = this.dx + other.dx;
+        int y = this.dy + other.dy;
+        if(x >= 2) x = 1;
+        if(x <= -2) x = -1;
+        if(y >= 2) y = 1;
+        if(y <= -2) y = -1;
+        Direction direction = NONE;
+        for (Direction value : Direction.values()) {
+            if (value.getDx() == x && value.getDy() == y) direction = value;
+        }
+        return direction;
+    }
 }

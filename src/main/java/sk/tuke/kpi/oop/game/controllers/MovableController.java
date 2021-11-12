@@ -7,7 +7,10 @@ import sk.tuke.kpi.oop.game.Direction;
 import sk.tuke.kpi.oop.game.Movable;
 import sk.tuke.kpi.oop.game.actions.Move;
 
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 public class MovableController implements KeyboardListener {
     private Movable actor;
@@ -18,9 +21,11 @@ public class MovableController implements KeyboardListener {
         Map.entry(Input.Key.RIGHT, Direction.EAST)
     );
     private Move<Movable> move;
+    private Set<Direction> directions;
 
     public MovableController(Movable movable){
         this.actor = movable;
+        this.directions = new HashSet<>();
     }
 
     @Override
@@ -28,7 +33,14 @@ public class MovableController implements KeyboardListener {
         if(keyDirectionMap.containsKey(key) == false) return;
         if(keyDirectionMap.get(key) == null) return;
         if(this.move != null) this.move.stop();
-        this.move = new Move<>(this.keyDirectionMap.get(key), Float.MAX_VALUE);
+        Direction direction = this.keyDirectionMap.get(key);
+        this.directions.add(direction);
+        if(this.directions.size() > 1){
+            Direction[] other = this.directions.toArray(new Direction[this.directions.size()]);
+            if(direction == other[1]) direction = direction.combine(other[0]);
+            else direction = direction.combine(other[1]);
+        }
+        this.move = new Move<>(direction, Float.MAX_VALUE);
         this.move.scheduleFor(this.actor);
     }
 
@@ -36,7 +48,10 @@ public class MovableController implements KeyboardListener {
     public void keyReleased(Input.@NotNull Key key){
         if(keyDirectionMap.containsKey(key) == false) return;
         if(this.move == null) return;
+        this.directions.clear();
         this.move.stop();
         this.move = null;
     }
 }
+
+

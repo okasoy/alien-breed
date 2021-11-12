@@ -12,11 +12,12 @@ import java.util.List;
 public class Backpack implements ActorContainer<Collectible> {
     private String name;
     private int capacity;
-    private List<Collectible> backpack = new ArrayList<>();
+    private List<Collectible> backpack;
 
     public Backpack(String name, int capacity){
         this.name = name;
         this.capacity = capacity;
+        this.backpack = new ArrayList<>();
     }
 
     @Override
