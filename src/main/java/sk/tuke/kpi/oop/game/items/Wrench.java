@@ -16,4 +16,9 @@ public class Wrench extends BreakableTool<DefectiveLight> implements Collectible
         if(defectiveLight == null) return;
         if(defectiveLight.repair()) super.useWith(defectiveLight);
     }
+
+    @Override
+    public Class<DefectiveLight> getUsingActorClass() {
+        return DefectiveLight.class;
+    }
 }

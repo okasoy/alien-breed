@@ -4,7 +4,7 @@ import sk.tuke.kpi.gamelib.framework.AbstractActor;
 import sk.tuke.kpi.gamelib.graphics.Animation;
 import sk.tuke.kpi.oop.game.characters.Ripley;
 
-public class Energy<A extends Ripley> extends AbstractActor implements Usable<A>{
+public class Energy extends AbstractActor implements Usable<Ripley>{
 
     public Energy(){
         Animation energyAnimation = new Animation("sprites/energy.png");
@@ -12,9 +12,14 @@ public class Energy<A extends Ripley> extends AbstractActor implements Usable<A>
     }
 
     @Override
-    public void useWith(A actor) {
+    public void useWith(Ripley actor) {
         if(actor == null || actor.getEnergy() == 100) return;
         actor.setEnergy(100);
         this.getScene().removeActor(this);
+    }
+
+    @Override
+    public Class<Ripley> getUsingActorClass() {
+        return Ripley.class;
     }
 }

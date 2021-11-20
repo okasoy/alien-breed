@@ -55,7 +55,10 @@ public class Move<A extends Movable> implements Action<A> {
         if(this.timePassed - this.Duration >= 1e-5){
             this.stop();
         }
-        else this.actor.setPosition(this.actor.getPosX() + this.Direction.getDx() * this.actor.getSpeed(), this.actor.getPosY() + this.Direction.getDy() * this.actor.getSpeed());
+        else{
+            this.actor.setPosition(this.actor.getPosX() + this.Direction.getDx() * this.actor.getSpeed(), this.actor.getPosY() + this.Direction.getDy() * this.actor.getSpeed());
+            if (this.actor.getScene().getMap().intersectsWithWall(this.actor)) this.actor.setPosition(this.actor.getPosX() - this.Direction.getDx() * this.actor.getSpeed(), this.actor.getPosY() - this.Direction.getDy() * this.actor.getSpeed());
+        }
     }
 
     @Override

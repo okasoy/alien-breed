@@ -2,10 +2,8 @@ package sk.tuke.kpi.oop.game;
 
 import sk.tuke.kpi.gamelib.*;
 import sk.tuke.kpi.gamelib.backends.lwjgl.LwjglBackend;
-import sk.tuke.kpi.gamelib.inspector.InspectableScene;
-import sk.tuke.kpi.oop.game.scenarios.FirstSteps;
+import sk.tuke.kpi.oop.game.scenarios.MissionImpossible;
 
-import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
@@ -13,13 +11,13 @@ public class Main {
 
         Game game = new GameApplication(windowSetup, new LwjglBackend());
 
-        Scene scene = new InspectableScene(new World("world"), List.of("sk.tuke.kpi"));
+        Scene missionImpossible = new World("mission-impossible", "maps/mission-impossible.tmx", new MissionImpossible.Factory());
 
-        SceneListener FirstSteps = new FirstSteps();
+        SceneListener MissionImpossible = new MissionImpossible();
 
-        scene.addListener(FirstSteps);
+        missionImpossible.addListener(MissionImpossible);
 
-        game.addScene(scene);
+        game.addScene(missionImpossible);
 
         game.start();
 

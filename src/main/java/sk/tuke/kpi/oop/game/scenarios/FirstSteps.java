@@ -1,7 +1,6 @@
 package sk.tuke.kpi.oop.game.scenarios;
 
 import org.jetbrains.annotations.NotNull;
-import sk.tuke.kpi.gamelib.Actor;
 import sk.tuke.kpi.gamelib.GameApplication;
 import sk.tuke.kpi.gamelib.Scene;
 import sk.tuke.kpi.gamelib.SceneListener;
@@ -9,7 +8,6 @@ import sk.tuke.kpi.gamelib.actions.ActionSequence;
 import sk.tuke.kpi.gamelib.actions.Invoke;
 import sk.tuke.kpi.gamelib.actions.Wait;
 import sk.tuke.kpi.gamelib.actions.When;
-import sk.tuke.kpi.oop.game.Direction;
 import sk.tuke.kpi.oop.game.actions.Use;
 import sk.tuke.kpi.oop.game.characters.Ripley;
 import sk.tuke.kpi.oop.game.controllers.KeeperController;
@@ -31,13 +29,13 @@ public class FirstSteps implements SceneListener {
         ).scheduleFor(ripley);*/
         MovableController movableController = new MovableController(ripley);
         scene.getInput().registerListener(movableController);
-        Energy<Ripley> energy = new Energy<>();
+        Energy energy = new Energy();
         scene.addActor(energy, 50, 50);
         new When<>(
             () -> energy.intersects(ripley),
             new Invoke<>(() -> new Use<>(energy).scheduleFor(ripley))
         ).scheduleFor(ripley);
-        Ammo<Ripley> ammo = new Ammo<>();
+        Ammo ammo = new Ammo();
         scene.addActor(ammo, 150, 150);
         new When<>(
             () -> ammo.intersects(ripley),
