@@ -7,7 +7,7 @@ import sk.tuke.kpi.oop.game.items.Hammer;
 import sk.tuke.kpi.oop.game.items.Usable;
 
 public class Locker extends AbstractActor implements Usable<Ripley> {
-    boolean used;
+    private boolean used;
 
     public Locker(){
         Animation locker = new Animation("sprites/locker.png");
