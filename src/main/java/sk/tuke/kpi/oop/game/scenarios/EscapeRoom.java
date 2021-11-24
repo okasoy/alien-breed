@@ -23,14 +23,14 @@ public class EscapeRoom implements SceneListener {
         @Override
         public @Nullable Actor create(@Nullable String type, @Nullable String name) {
             if (Objects.equals(name, "alien")) {
-                if(Objects.equals(type, "running")) return new Alien(new RandomlyMoving());
-                else if(Objects.equals(type, "waiting1")) return new Alien(new Observing<>(Door.DOOR_OPENED, door -> door.getName().equals("front door"), new RandomlyMoving()));
-                else if(Objects.equals(type, "waiting2")) return new Alien(new Observing<>(Door.DOOR_OPENED, door -> door.getName().equals("back door"), new RandomlyMoving()));
+                if(Objects.equals(type, "running")) return new Alien(100, new RandomlyMoving());
+                else if(Objects.equals(type, "waiting1")) return new Alien(100, new Observing<>(Door.DOOR_OPENED, door -> door.getName().equals("front door"), new RandomlyMoving()));
+                else if(Objects.equals(type, "waiting2")) return new Alien(100, new Observing<>(Door.DOOR_OPENED, door -> door.getName().equals("back door"), new RandomlyMoving()));
             }
             else if (Objects.equals(name, "ammo")) return new Ammo();
             else if (Objects.equals(name, "ellen")) return new Ripley();
             else if (Objects.equals(name, "energy")) return new Energy();
-            else if (Objects.equals(name, "alien mother")) return new AlienMother(new Observing<>(Door.DOOR_OPENED, door -> door.getName().equals("back door"), new RandomlyMoving()));
+            else if (Objects.equals(name, "alien mother")) return new AlienMother(200, new Observing<>(Door.DOOR_OPENED, door -> door.getName().equals("back door"), new RandomlyMoving()));
             else if (Objects.equals(name, "front door") || Objects.equals(name, "exit door")) return new Door(name, Door.Orientation.VERTICAL);
             else if (Objects.equals(name, "back door")) return new Door(name, Door.Orientation.HORIZONTAL);
             return null;

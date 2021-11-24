@@ -8,7 +8,10 @@ import sk.tuke.kpi.oop.game.weapons.Fireable;
 public class Fire <A extends Armed> extends AbstractAction<A> {
     @Override
     public void execute(float deltaTime) {
-        if(this.getActor() == null || this.isDone() == true) return;
+        if(this.getActor() == null || this.isDone() == true){
+            this.setDone(true);
+            return;
+        }
         Fireable fireable = this.getActor().getFirearm().fire();
         int x = Direction.fromAngle(this.getActor().getAnimation().getRotation()).getDx();
         int y = Direction.fromAngle(this.getActor().getAnimation().getRotation()).getDy();

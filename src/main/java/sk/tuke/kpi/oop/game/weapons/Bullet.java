@@ -13,12 +13,12 @@ import sk.tuke.kpi.oop.game.characters.Ripley;
 import java.util.List;
 
 public class Bullet extends AbstractActor implements Fireable {
-    private Animation bullet;
+    private Animation bulletAnimation;
     private int speed;
 
     public Bullet(){
-        this.bullet = new Animation("sprites/bullet.png");
-        setAnimation(this.bullet);
+        this.bulletAnimation = new Animation("sprites/bullet.png");
+        setAnimation(this.bulletAnimation);
         this.speed = 4;
     }
 
@@ -34,7 +34,7 @@ public class Bullet extends AbstractActor implements Fireable {
     @Override
     public void startedMoving(Direction direction) {
         if(direction == null || direction == Direction.NONE) return;
-        this.bullet.setRotation(direction.getAngle());
+        this.bulletAnimation.setRotation(direction.getAngle());
     }
 
     @Override

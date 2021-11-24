@@ -12,6 +12,7 @@ import sk.tuke.kpi.oop.game.items.Usable;
 public class Door extends AbstractActor implements Openable, Usable<Actor> {
     private Animation openedDoorAnimation;
     private Animation closedDoorAnimation;
+    private String verticalDoor = "sprites/vdoor.png";
     private boolean isOpen;
     public enum Orientation{
         VERTICAL,
@@ -22,8 +23,8 @@ public class Door extends AbstractActor implements Openable, Usable<Actor> {
     public static final Topic<Door> DOOR_CLOSED = Topic.create("door closed", Door.class);
 
     public Door() {
-        this.closedDoorAnimation = new Animation("sprites/vdoor.png", 16, 32, 0.1f, Animation.PlayMode.ONCE_REVERSED);
-        this.openedDoorAnimation = new Animation("sprites/vdoor.png", 16, 32, 0.1f, Animation.PlayMode.ONCE);
+        this.closedDoorAnimation = new Animation(this.verticalDoor, 16, 32, 0.1f, Animation.PlayMode.ONCE_REVERSED);
+        this.openedDoorAnimation = new Animation(this.verticalDoor, 16, 32, 0.1f, Animation.PlayMode.ONCE);
         setAnimation(this.closedDoorAnimation);
         this.isOpen = false;
     }
@@ -31,8 +32,8 @@ public class Door extends AbstractActor implements Openable, Usable<Actor> {
     public Door(String name, Orientation orientation){
         super(name);
         if(orientation == Orientation.VERTICAL) {
-            this.closedDoorAnimation = new Animation("sprites/vdoor.png", 16, 32, 0.1f, Animation.PlayMode.ONCE_REVERSED);
-            this.openedDoorAnimation = new Animation("sprites/vdoor.png", 16, 32, 0.1f, Animation.PlayMode.ONCE);
+            this.closedDoorAnimation = new Animation(this.verticalDoor, 16, 32, 0.1f, Animation.PlayMode.ONCE_REVERSED);
+            this.openedDoorAnimation = new Animation(this.verticalDoor, 16, 32, 0.1f, Animation.PlayMode.ONCE);
             setAnimation(this.closedDoorAnimation);
             this.isOpen = false;
             this.orientation = Orientation.VERTICAL;

@@ -9,7 +9,10 @@ import sk.tuke.kpi.oop.game.items.Collectible;
 public class Drop <A extends Keeper> extends AbstractAction<A> {
     @Override
     public void execute(float deltaTime) {
-        if(this.getActor() == null || this.isDone() == true || this.getActor().getBackpack().getSize() == 0) return;
+        if(this.getActor() == null || this.isDone() == true || this.getActor().getBackpack().peek() == null) {
+            this.setDone(true);
+            return;
+        }
         Scene scene = this.getActor().getScene();
         Collectible item = this.getActor().getBackpack().peek();
         this.getActor().getBackpack().remove(item);

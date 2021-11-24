@@ -53,5 +53,6 @@ public class Health {
         if(this.effects == null) return;
         this.currentHealth = 0;
         this.effects.forEach(ExhaustionEffect::apply);
+        this.effects.clear();
     }
 }

@@ -11,7 +11,10 @@ import java.util.List;
 public class Take<A extends Keeper> extends AbstractAction<A> {
    @Override
     public void execute(float deltaTime) {
-        if(getActor() == null || this.isDone() == true) return;
+        if(getActor() == null || this.isDone() == true){
+            this.setDone(true);
+            return;
+        }
         Scene scene = this.getActor().getScene();
         List<Actor> items= scene.getActors();
         for(Actor item : items){
