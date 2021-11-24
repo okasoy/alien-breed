@@ -25,18 +25,22 @@ public class KeeperController implements KeyboardListener {
         if(key == Input.Key.ENTER) new Take<>().scheduleFor(this.keeper);
         if(key == Input.Key.BACKSPACE) new Drop<>().scheduleFor(this.keeper);
         if(key == Input.Key.S) new Shift<>().scheduleFor(this.keeper);
-        if(key == Input.Key.U){
-            for (Actor actor : this.keeper.getScene().getActors()) {
-                if (actor instanceof Usable && this.keeper.intersects(actor)) {
-                    new Use<>((Usable<?>) actor).scheduleForIntersectingWith(this.keeper);
-                }
+        if(key == Input.Key.U) this.pressedU();
+        if(key == Input.Key.B) this.pressedB();
+    }
+
+    public void pressedU(){
+        for (Actor actor : this.keeper.getScene().getActors()) {
+            if (actor instanceof Usable && this.keeper.intersects(actor)) {
+                new Use<>((Usable<?>) actor).scheduleForIntersectingWith(this.keeper);
             }
         }
-        if(key == Input.Key.B) {
-            Collectible item = this.keeper.getBackpack().peek();
-            if(item instanceof Usable) {
-                if(new Use<>((Usable<?>) item).scheduleForIntersectingWith(this.keeper) != null) this.keeper.getBackpack().remove(item);
-            }
+    }
+
+    public void pressedB(){
+        Collectible item = this.keeper.getBackpack().peek();
+        if(item instanceof Usable) {
+            if(new Use<>((Usable<?>) item).scheduleForIntersectingWith(this.keeper) != null) this.keeper.getBackpack().remove(item);
         }
     }
 }
