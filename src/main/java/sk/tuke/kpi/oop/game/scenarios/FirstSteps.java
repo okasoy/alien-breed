@@ -20,7 +20,7 @@ public class FirstSteps implements SceneListener {
     @Override
     public void sceneInitialized(Scene scene){
         this.ripley = new Ripley();
-        this.ripley.setEnergy(55);
+        //this.ripley.setEnergy(55);
         scene.addActor(ripley, 0, 0);
         /*new Move(Direction.WEST, 1f).scheduleFor(ripley);
         new ActionSequence<>(
@@ -94,7 +94,7 @@ public class FirstSteps implements SceneListener {
         int yTextPos = windowHeight - GameApplication.STATUS_LINE_OFFSET;
         int windowWidth = scene.getGame().getWindowSetup().getWidth();
         int xTextPos = windowWidth - 5*GameApplication.STATUS_LINE_OFFSET;
-        scene.getGame().getOverlay().drawText("Energy: " + this.ripley.getEnergy(), xTextPos, yTextPos);
+        scene.getGame().getOverlay().drawText("Energy: " + this.ripley.getHealth().getValue(), xTextPos, yTextPos);
         int yTextPos1 = windowHeight - GameApplication.STATUS_LINE_OFFSET;
         int xTextPos1 = windowWidth - 10*GameApplication.STATUS_LINE_OFFSET;
         scene.getGame().getOverlay().drawText("Ammo: " + this.ripley.getAmmo(), xTextPos1, yTextPos1);

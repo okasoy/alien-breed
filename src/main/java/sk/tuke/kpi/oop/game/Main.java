@@ -2,8 +2,7 @@ package sk.tuke.kpi.oop.game;
 
 import sk.tuke.kpi.gamelib.*;
 import sk.tuke.kpi.gamelib.backends.lwjgl.LwjglBackend;
-import sk.tuke.kpi.oop.game.scenarios.MissionImpossible;
-
+import sk.tuke.kpi.oop.game.scenarios.EscapeRoom;
 
 public class Main {
     public static void main(String[] args) {
@@ -11,13 +10,13 @@ public class Main {
 
         Game game = new GameApplication(windowSetup, new LwjglBackend());
 
-        Scene missionImpossible = new World("mission-impossible", "maps/mission-impossible.tmx", new MissionImpossible.Factory());
+        Scene escapeRoom = new World("escape-room", "maps/escape-room.tmx", new EscapeRoom.Factory());
 
-        SceneListener MissionImpossible = new MissionImpossible();
+        SceneListener EscapeRoom = new EscapeRoom();
 
-        missionImpossible.addListener(MissionImpossible);
+        escapeRoom.addListener(EscapeRoom);
 
-        game.addScene(missionImpossible);
+        game.addScene(escapeRoom);
 
         game.start();
 

@@ -26,7 +26,7 @@ public enum Direction {
         return dy;
     }
 
-    public float getAngel(){
+    public float getAngle(){
         if(this.dx == -1){
             if(this.dy == -1) return 135;
             else if(this.dy == 0) return 90;
@@ -53,9 +53,21 @@ public enum Direction {
         if(y >= 2) y = 1;
         if(y <= -2) y = -1;
         Direction direction = NONE;
-        for (Direction value : Direction.values()) {
-            if (value.getDx() == x && value.getDy() == y) direction = value;
+        for(Direction value : Direction.values()) {
+            if(value.getDx() == x && value.getDy() == y) direction = value;
         }
         return direction;
+    }
+
+    public static Direction fromAngle(float angle){
+        if(angle == 0) return NORTH;
+        if(angle == 45) return NORTHWEST;
+        if(angle == 90) return WEST;
+        if(angle == 135) return SOUTHWEST;
+        if(angle == 180) return SOUTH;
+        if(angle == 225) return SOUTHEAST;
+        if(angle == 270) return EAST;
+        if(angle == 315) return NORTHEAST;
+        return NONE;
     }
 }
