@@ -29,8 +29,8 @@ public class MovableController implements KeyboardListener {
 
     @Override
     public void keyPressed(@NotNull Input.Key key){
-        if(keyDirectionMap.containsKey(key) == false) return;
-        if(keyDirectionMap.get(key) == null) return;
+        if(this.keyDirectionMap.containsKey(key) == false) return;
+        if(this.keyDirectionMap.get(key) == null) return;
         if(this.move != null) this.move.stop();
         Direction direction = this.keyDirectionMap.get(key);
         this.directions.add(direction);
@@ -45,11 +45,16 @@ public class MovableController implements KeyboardListener {
 
     @Override
     public void keyReleased(@NotNull Input.Key key){
-        if(keyDirectionMap.containsKey(key) == false) return;
+        if(this.keyDirectionMap.containsKey(key) == false) return;
         if(this.move == null) return;
-        this.directions.clear();
+        this.directions.remove(this.keyDirectionMap.get(key));
         this.move.stop();
         this.move = null;
+        if(this.directions.size() > 0){
+            Direction[] other = this.directions.toArray(new Direction[this.directions.size()]);
+            this.move = new Move<>(other[0], Float.MAX_VALUE);
+            this.move.scheduleFor(this.actor);
+        }
     }
 }
 
