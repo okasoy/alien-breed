@@ -20,11 +20,11 @@ public class KeeperController implements KeyboardListener {
     }
 
     @Override
-    public void keyPressed(Input.@NotNull Key key){
+    public void keyPressed(@NotNull Input.Key key){
         if(this.keeper == null) return;
-        if(key == Input.Key.ENTER) new Take<>(this.keeper).scheduleFor(this.keeper);
-        if(key == Input.Key.BACKSPACE) new Drop<>(this.keeper).scheduleFor(this.keeper);
-        if(key == Input.Key.S) new Shift<>(this.keeper).scheduleFor(this.keeper);
+        if(key == Input.Key.ENTER) new Take<>().scheduleFor(this.keeper);
+        if(key == Input.Key.BACKSPACE) new Drop<>().scheduleFor(this.keeper);
+        if(key == Input.Key.S) new Shift<>().scheduleFor(this.keeper);
         if(key == Input.Key.U){
             for (Actor actor : this.keeper.getScene().getActors()) {
                 if (actor instanceof Usable && this.keeper.intersects(actor)) {

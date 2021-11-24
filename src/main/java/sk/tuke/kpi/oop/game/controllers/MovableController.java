@@ -29,7 +29,7 @@ public class MovableController implements KeyboardListener {
     }
 
     @Override
-    public void keyPressed(Input.@NotNull Key key){
+    public void keyPressed(@NotNull Input.Key key){
         if(keyDirectionMap.containsKey(key) == false) return;
         if(keyDirectionMap.get(key) == null) return;
         if(this.move != null) this.move.stop();
@@ -45,7 +45,7 @@ public class MovableController implements KeyboardListener {
     }
 
     @Override
-    public void keyReleased(Input.@NotNull Key key){
+    public void keyReleased(@NotNull Input.Key key){
         if(keyDirectionMap.containsKey(key) == false) return;
         if(this.move == null) return;
         this.directions.clear();

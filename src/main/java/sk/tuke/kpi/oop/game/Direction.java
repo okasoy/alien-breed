@@ -28,19 +28,29 @@ public enum Direction {
 
     public float getAngle(){
         if(this.dx == -1){
-            if(this.dy == -1) return 135;
-            else if(this.dy == 0) return 90;
-            else if(this.dy == 1) return 45;
+            return this.minus(this.dy);
         }
         else if(this.dx == 0){
             if(this.dy == -1) return 180;
             else return 0;
         }
         else if(this.dx == 1){
-            if(this.dy == -1) return 225;
-            else if(this.dy == 0) return 270;
-            else if(this.dy == 1) return 315;
+            return this.plus(this.dy);
         }
+        return 0;
+    }
+
+    private float minus(float dy){
+        if(dy == -1) return 135;
+        else if(dy == 0) return 90;
+        else if(dy == 1) return 45;
+        return 0;
+    }
+
+    private float plus(float dy){
+        if(this.dy == -1) return 225;
+        else if(this.dy == 0) return 270;
+        else if(this.dy == 1) return 315;
         return 0;
     }
 
