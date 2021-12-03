@@ -11,6 +11,7 @@ import sk.tuke.kpi.oop.game.actions.Take;
 import sk.tuke.kpi.oop.game.actions.Use;
 import sk.tuke.kpi.oop.game.items.Collectible;
 import sk.tuke.kpi.oop.game.items.Usable;
+import sk.tuke.kpi.oop.game.switches.Switching;
 
 public class KeeperController implements KeyboardListener {
     private Keeper keeper;
@@ -27,6 +28,7 @@ public class KeeperController implements KeyboardListener {
         if(key == Input.Key.S) new Shift<>().scheduleFor(this.keeper);
         if(key == Input.Key.U) this.pressedU();
         if(key == Input.Key.B) this.pressedB();
+        if(key == Input.Key.P) this.pressedP();
     }
 
     public void pressedU(){
@@ -40,5 +42,13 @@ public class KeeperController implements KeyboardListener {
     public void pressedB(){
         Collectible item = this.keeper.getBackpack().peek();
         if(item instanceof Usable && new Use<>((Usable<?>) item).scheduleForIntersectingWith(this.keeper) != null) this.keeper.getBackpack().remove(item);
+    }
+
+    public void pressedP(){
+        for(Actor actor : this.keeper.getScene().getActors()){
+            if(actor instanceof Switching && this.keeper.intersects(actor)){
+                ((Switching) actor).addActor(this.keeper);
+            }
+        }
     }
 }

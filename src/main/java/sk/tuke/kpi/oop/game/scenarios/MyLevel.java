@@ -20,8 +20,8 @@ import sk.tuke.kpi.oop.game.items.Energy;
 import sk.tuke.kpi.oop.game.openables.Door;
 import sk.tuke.kpi.oop.game.openables.LockedDoor;
 import sk.tuke.kpi.oop.game.openables.StrongDoor;
-import sk.tuke.kpi.oop.game.switchers.FloorSwitch;
-import sk.tuke.kpi.oop.game.switchers.Switch;
+import sk.tuke.kpi.oop.game.switches.FloorSwitch;
+import sk.tuke.kpi.oop.game.switches.Switch;
 import sk.tuke.kpi.oop.game.weapons.Trap;
 
 import java.util.Map;

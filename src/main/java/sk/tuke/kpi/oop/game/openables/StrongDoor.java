@@ -11,6 +11,13 @@ public class StrongDoor extends Door{
     private Animation closedAnimation;
     private boolean isOpen;
 
+    public StrongDoor(){
+        this.closedAnimation = new Animation("sprites/vdoor_strong.png", 16, 32, 0.1f, Animation.PlayMode.ONCE_REVERSED);
+        this.openedAnimation = new Animation("sprites/vdoor_strong.png", 16, 32, 0.1f, Animation.PlayMode.ONCE);
+        setAnimation(this.closedAnimation);
+        this.isOpen = false;
+    }
+
     public StrongDoor(String name, Orientation orientation){
         super(name, orientation);
         this.closedAnimation = new Animation("sprites/vdoor_strong.png", 16, 32, 0.1f, Animation.PlayMode.ONCE_REVERSED);

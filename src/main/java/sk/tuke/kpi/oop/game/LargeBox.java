@@ -15,6 +15,13 @@ public class LargeBox extends AbstractActor {
         this.attempts = 3;
     }
 
+    public LargeBox(int attempts){
+        Animation boxAnimation = new Animation("sprites/box_large.png");
+        setAnimation(boxAnimation);
+        this.used = false;
+        this.attempts = attempts;
+    }
+
     public int getAttempts() {
         return this.attempts;
     }
