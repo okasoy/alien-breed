@@ -35,7 +35,7 @@ public class Alien extends AbstractActor implements Movable, Alive, Enemy {
 
     @Override
     public int getSpeed() {
-        return 2;
+        return 1;
     }
 
     @Override

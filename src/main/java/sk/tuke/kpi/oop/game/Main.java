@@ -2,21 +2,22 @@ package sk.tuke.kpi.oop.game;
 
 import sk.tuke.kpi.gamelib.*;
 import sk.tuke.kpi.gamelib.backends.lwjgl.LwjglBackend;
-import sk.tuke.kpi.oop.game.scenarios.EscapeRoom;
+import sk.tuke.kpi.oop.game.scenarios.MissionImpossible;
+import sk.tuke.kpi.oop.game.scenarios.MyLevel;
 
 public class Main {
     public static void main(String[] args) {
-        WindowSetup windowSetup = new WindowSetup("Project Ellen", 800, 600);
+        WindowSetup windowSetup = new WindowSetup("Project Ellen", 1200, 600);
 
         Game game = new GameApplication(windowSetup, new LwjglBackend());
 
-        Scene escapeRoom = new World("escape-room", "maps/escape-room.tmx", new EscapeRoom.Factory());
+        Scene myLevel = new World("my-level", "maps/map.tmx", new MyLevel.Factory());
 
-        SceneListener EscapeRoom = new EscapeRoom();
+        SceneListener MyLevel = new MyLevel();
 
-        escapeRoom.addListener(EscapeRoom);
+        myLevel.addListener(MyLevel);
 
-        game.addScene(escapeRoom);
+        game.addScene(myLevel);
 
         game.start();
 

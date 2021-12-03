@@ -3,6 +3,7 @@ package sk.tuke.kpi.oop.game;
 import sk.tuke.kpi.gamelib.Scene;
 import sk.tuke.kpi.gamelib.framework.AbstractActor;
 import sk.tuke.kpi.gamelib.graphics.Animation;
+import sk.tuke.kpi.gamelib.messages.Topic;
 import sk.tuke.kpi.oop.game.actions.PerpetualReactorHeating;
 
 import java.util.HashSet;
@@ -12,6 +13,7 @@ public class Reactor extends AbstractActor implements Switchable, Repairable{
     private int temperature;
     private int damage;
     private boolean isOn;
+    private boolean repaired;
     private Animation AnimationState;
     private Animation normalAnimation;
     private Animation hotAnimation;
@@ -19,6 +21,7 @@ public class Reactor extends AbstractActor implements Switchable, Repairable{
     private Animation turnedOffAnimation;
     private Animation extinguisherAnimation;
     private Set<EnergyConsumer> devices;
+    public static final Topic<Reactor> REACTOR_REPAIRED = Topic.create("reactor repaired", Reactor.class);
 
     public Reactor(){
         this.normalAnimation = new Animation("sprites/reactor_on.png", 80, 80, 0.1f, Animation.PlayMode.LOOP_PINGPONG);
@@ -29,6 +32,7 @@ public class Reactor extends AbstractActor implements Switchable, Repairable{
         turnOff();
         this.temperature = 0;
         this.damage = 0;
+        this.repaired = false;
         devices = new HashSet<>();
     }
 
@@ -90,8 +94,14 @@ public class Reactor extends AbstractActor implements Switchable, Repairable{
         if(newDamage >= 0) this.damage = newDamage;
         else this.damage = 0;
         this.temperature = 2000 + newDamage * 4000 / 100;
+        getScene().getMessageBus().publish(REACTOR_REPAIRED, this);
         updateAnimation();
+        this.repaired = true;
         return true;
+    }
+
+    public boolean isRepaired() {
+        return this.repaired;
     }
 
     @Override

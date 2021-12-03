@@ -16,7 +16,7 @@ public class RandomlyMoving implements Behaviour<Movable>{
         new Loop<>(
             new ActionSequence<>(
                 new Invoke<>(this::moveRandomly),
-                new Wait<>(3))
+                new Wait<>(2))
         ).scheduleFor(actor);
     }
 
@@ -30,6 +30,6 @@ public class RandomlyMoving implements Behaviour<Movable>{
             }
         }
         actor.getAnimation().setRotation(direction.getAngle());
-        new Move<>(direction, 3).scheduleFor(actor);
+        new Move<>(direction, 1).scheduleFor(actor);
     }
 }

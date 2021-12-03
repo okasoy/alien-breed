@@ -7,6 +7,7 @@ import sk.tuke.kpi.gamelib.framework.AbstractActor;
 import sk.tuke.kpi.gamelib.framework.actions.Loop;
 import sk.tuke.kpi.gamelib.graphics.Animation;
 import sk.tuke.kpi.oop.game.Direction;
+import sk.tuke.kpi.oop.game.LargeBox;
 import sk.tuke.kpi.oop.game.characters.Alive;
 import sk.tuke.kpi.oop.game.characters.Ripley;
 
@@ -49,6 +50,10 @@ public class Bullet extends AbstractActor implements Fireable {
         for (Actor aliveActor : aliveActors) {
             if (aliveActor instanceof Alive && !(aliveActor instanceof Ripley)  && aliveActor.intersects(this)) {
                 ((Alive) aliveActor).getHealth().drain(10);
+                this.collidedWithWall();
+            }
+            else if(aliveActor instanceof LargeBox && aliveActor.intersects(this) && ((LargeBox) aliveActor).getAttempts() > 0){
+                ((LargeBox) aliveActor).decreaseAttempts();
                 this.collidedWithWall();
             }
         }
